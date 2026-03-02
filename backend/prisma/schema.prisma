@@ -1,0 +1,121 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ==========================================
+// Better Auth tables
+// ==========================================
+
+model user {
+  id            String    @id
+  name          String
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Asthia custom fields
+  kycStatus     String    @default("PENDING") // PENDING | APPROVED | REJECTED
+  walletAddress String?
+
+  sessions      session[]
+  accounts      account[]
+  transactions  TransactionFiat[]
+  marketplaceListings MarketplaceListing[] @relation("MarketplaceListings")
+}
+
+model session {
+  id        String   @id
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      user     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  user      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+}
+
+model verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+// ==========================================
+// Asthia business tables
+// ==========================================
+
+model Asset {
+  id              String   @id @default(uuid())
+  title           String
+  description     String
+  category        String   @default("autre") // immobilier | pme | luxe | art | vignobles | startups | autre
+  imageUrl        String
+  totalPrice      Float
+  tokenPrice      Float
+  softCap         Float
+  hardCap         Float
+  currentRaised   Float    @default(0)
+  endDate         DateTime
+  tokenAddress    String?
+  campaignAddress String?
+  status          String   @default("ACTIVE")
+  createdAt       DateTime @default(now())
+
+  transactions TransactionFiat[]
+  marketplaceListings MarketplaceListing[]
+}
+
+model TransactionFiat {
+  id          String   @id @default(uuid())
+  userId      String
+  assetId     String
+  amountEur   Float
+  status      String   @default("PENDING")
+  paymentRef  String?
+  txHash      String?
+  createdAt   DateTime @default(now())
+
+  user  user  @relation(fields: [userId], references: [id])
+  asset Asset @relation(fields: [assetId], references: [id])
+}
+
+model MarketplaceListing {
+  id            String   @id @default(uuid())
+  sellerId      String
+  assetId       String
+  tokenCount    Int
+  pricePerToken Float
+  status        String   @default("ACTIVE") // ACTIVE | SOLD | CANCELLED
+  createdAt     DateTime @default(now())
+
+  seller user  @relation("MarketplaceListings", fields: [sellerId], references: [id])
+  asset  Asset @relation(fields: [assetId], references: [id])
+}

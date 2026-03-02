@@ -1,0 +1,20 @@
+{
+  "network": "amoy",
+  "chainId": 80002,
+  "deployer": "0xd767fCf71dF07D2C60adBa47987cdE2B14B441F8",
+  "timestamp": "2026-02-28T16:14:29.344Z",
+  "contracts": {
+    "AsthiaToken": {
+      "address": "0x57d99C59570BbAe11445e67D2702FB47568A4F68",
+      "name": "Asthia Immo Lyon 1",
+      "symbol": "AIL1"
+    },
+    "CrowdfundingCampaign": {
+      "address": "0xebe873d31Bf82E3e1A1226BD441C45E8613e9ee6",
+      "tokenPrice": 10000,
+      "softCap": 40000000,
+      "hardCap": 50000000,
+      "deadline": 1774887261
+    }
+  }
+}
