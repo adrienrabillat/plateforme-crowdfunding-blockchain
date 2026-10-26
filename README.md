@@ -2,6 +2,8 @@
 
 Plateforme d'investissement fractionné dans des actifs réels (immobilier, PME, startups) : chaque actif est représenté par un jeton, et l'argent levé est rendu aux investisseurs si l'objectif n'est pas atteint.
 
+![Page d'accueil](docs/apercu.jpg)
+
 ## Fonctionnement
 
 1. L'investisseur crée son compte, passe une vérification d'identité (KYC) et choisit un actif dans le catalogue.
