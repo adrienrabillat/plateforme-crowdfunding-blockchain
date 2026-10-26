@@ -9,3 +9,7 @@ artifacts/
 typechain-types/
 dev.db
 dev.db-journal
+
+# Documents de travail (restent en local)
+Archive.zip
+*.docx

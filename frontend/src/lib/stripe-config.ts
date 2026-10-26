@@ -1,0 +1,62 @@
+export const stripeAppearance = {
+  theme: "flat" as const,
+  variables: {
+    colorPrimary: "#1A1A2E",
+    colorBackground: "#FFFFFF",
+    colorText: "#1A1A2E",
+    colorTextSecondary: "#6B7280",
+    colorTextPlaceholder: "#9CA3AF",
+    colorDanger: "#EF4444",
+    colorSuccess: "#22C55E",
+    fontFamily: "system-ui, -apple-system, sans-serif",
+    borderRadius: "12px",
+    spacingUnit: "4px",
+    fontSizeBase: "15px",
+    colorIconTab: "#6B7280",
+    colorIconTabHover: "#1A1A2E",
+    colorIconTabSelected: "#FFFFFF",
+  },
+  rules: {
+    ".Tab": {
+      border: "1.5px solid #E5E7EB",
+      backgroundColor: "#FFFFFF",
+      color: "#1A1A2E",
+      fontWeight: "600",
+      boxShadow: "0 1px 3px rgba(0, 0, 0, 0.04)",
+    },
+    ".Tab:hover": {
+      border: "1.5px solid #1A1A2E",
+      color: "#1A1A2E",
+    },
+    ".Tab--selected": {
+      backgroundColor: "#1A1A2E",
+      color: "#FFFFFF",
+      border: "1.5px solid #1A1A2E",
+      boxShadow: "0 4px 12px rgba(26, 26, 46, 0.2)",
+    },
+    ".TabIcon--selected": { fill: "#FFFFFF" },
+    ".TabLabel--selected": { color: "#FFFFFF" },
+    ".Input": {
+      border: "1.5px solid #E5E7EB",
+      backgroundColor: "#FFFFFF",
+      color: "#1A1A2E",
+      fontSize: "15px",
+    },
+    ".Input:focus": {
+      border: "1.5px solid #1A1A2E",
+      boxShadow: "0 0 0 3px rgba(26, 26, 46, 0.08)",
+    },
+    ".Input::placeholder": { color: "#9CA3AF" },
+    ".Label": {
+      color: "#1A1A2E",
+      fontWeight: "500",
+      fontSize: "14px",
+      marginBottom: "6px",
+    },
+    ".Block": {
+      backgroundColor: "#FAFAFA",
+      borderRadius: "12px",
+      padding: "12px",
+    },
+  },
+};
